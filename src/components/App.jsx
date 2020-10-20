@@ -20,21 +20,14 @@ class App extends React.Component {
     });
   }
   onSearchClick(event) {
-    var options = {
-      key: YOUTUBE_API_KEY,
-      query: $(event.target).prev().val(),
-      max: 5,
-    };
-    this.props.search(options, (resultVideos) => {
-      this.setState({videos: resultVideos, currentVideo: resultVideos[0]});
-    });
+    this.getResults($(event.target).prev().val());
   }
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search search = {this.props.search} onSearchClickHandler = {this.onSearchClick.bind(this)}/>
+            <Search onSearchClickHandler = {this.onSearchClick.bind(this)}/>
           </div>
         </nav>
         <div className="row">
@@ -49,12 +42,15 @@ class App extends React.Component {
     );
   }
   componentDidMount() {
+    this.getResults('hello');
+  }
+  getResults(query) {
     var options = {
       key: YOUTUBE_API_KEY,
-      query: '',
+      query: query,
       max: 5,
     };
-    this.props.search(options, (resultVideos) => {
+    this.props.searchYouTube(options, (resultVideos) => {
       this.setState({videos: resultVideos, currentVideo: resultVideos[0]});
     });
   }
