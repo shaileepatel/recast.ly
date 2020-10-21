@@ -22,12 +22,15 @@ class App extends React.Component {
   onSearchClick(event) {
     this.getResults($(event.target).prev().val());
   }
+  onType(event) {
+    this.getResults($(event.target).val());
+  }
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search onSearchClickHandler = {this.onSearchClick.bind(this)}/>
+            <Search onSearchClickHandler = {this.onSearchClick.bind(this)} onTypeHandler = {this.onType.bind(this)}/>
           </div>
         </nav>
         <div className="row">

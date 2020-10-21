@@ -1,6 +1,6 @@
 import YOUTUBE_API_KEY from '../config/youtube.js';
 
-var searchYouTube = function (options, callback = ()=>{}) {
+var searchYouTubeNotDebounced = function (options, callback = ()=>{}) {
   $.ajax({
     type: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/search',
@@ -21,5 +21,7 @@ var searchYouTube = function (options, callback = ()=>{}) {
     }
   });
 };
+
+var searchYouTube = _.debounce(searchYouTubeNotDebounced, 500);
 
 export default searchYouTube;
